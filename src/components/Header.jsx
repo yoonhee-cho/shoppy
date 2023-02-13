@@ -1,39 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { BsYoutube, BsSearch } from 'react-icons/bs';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { FiCoffee, FiShoppingCart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
-    const { keyword } = useParams();
-    const navigate = useNavigate();
-    const [text, setText] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate(`/videos/${text}`)
-    }
-
-    useEffect(()=> setText(keyword || ''), [keyword]);
-
     return (
-        <header className='w-full flex justify-center p-4 text-2xl border-b border-zinc-600 mb-4'>
+        <header className='w-full flex justify-between justify-center p-4 text-2xl border-b border-fuchsia-200 mb-4'>
             <Link to='/' className='flex items-center'>
-                < BsYoutube className='text-3xl text-brand'/>
-                <h1 className='ml-2 text-2xl font-bold'>Youtube</h1>
+                < FiCoffee className='text-3xl text-fuchsia-600 '/>
+                <h1 className='ml-2 text-2xl text-fuchsia-600 font-bold'>Shoppy</h1>
             </Link>
 
-            <form className='flex justify-center' type='submit' onSubmit={(e)=>handleSubmit(e)}>
-                <input 
-                    className='w-7/12 pl-5 p-2 outline-none bg-stone-900 text-neutral-400 rounded-tl-full rounded-bl-full border-t border-b border-l border-neutral-600' 
-                    type="text" 
-                    placeholder='Search'
-                    value={text}
-                    onChange={(e)=>{setText(e.target.value)}}
-                />
-                <button 
-                    className='p-3 px-6 bg-neutral-700 text-white rounded-tr-full rounded-br-full border border-neutral-600'>
-                    <BsSearch/>
-                </button>
-            </form>
+            <ul className='flex items-center space-x-6'>
+                <li>
+                    <Link to='/products' className='flex items-center'>
+                        <h1 className='ml-2 text-xl'>Products</h1>
+                    </Link>
+                </li>
+
+                <li>
+                    <Link to='/cart' className='flex items-center'>
+                        <FiShoppingCart className='text-bold' />
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/login' className='flex items-center'>
+                        <button className='p-2 bg-fuchsia-600 text-fuchsia-100 rounded'>
+                            Log In
+                        </button>
+                    </Link>
+                </li>
+            </ul>
         </header>
     );
 }
